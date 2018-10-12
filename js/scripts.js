@@ -15,42 +15,66 @@ function json(response) {
 }
 
 function user_login(){
-var email = document.getElementById("email").value;
-var password = document.getElementById("password").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
 
-if(email == "" || password == "")
-{
-    document.getElementById("alert-box").innerHTML = "Please fill the entire form";
-}else
-{
-    var loginInfo = {
-        email: email,
-        password: password
-        };
-        
-    fetch('https://tims-fast-food.herokuapp.com/api/v1/auth/login', {
-    method: 'post',
-    headers:{
-        "Content-Type": "application/json"
-    },
-    mode: 'cors',
-    body: JSON.stringify(loginInfo)
-    })
-    .then(json)
+    if(email == "" || password == "")
+    {
+        document.getElementById("alert-box").innerHTML = "Please fill the entire form";
+    }else
+    {
+        var loginInfo = {
+            email: email,
+            password: password
+            };
+            
+        fetch('https://tims-fast-food.herokuapp.com/api/v1/auth/login', {
+        method: 'post',
+        headers:{
+            "Content-Type": "application/json"
+        },
+        mode: 'cors',
+        body: JSON.stringify(loginInfo)
+        })
+        .then(json)
+        .then(function (data) {
+            console.log('Request succeeded with JSON response', data);
+            if (data['ok']== true)
+            {
+                window.sessionStorage.setItem('token', data['data']['token']);
+                if (data['data']['role'] == 'Admin')
+                {
+                    redirect:window.location.replace('admin/index.html')
+                }
+                else
+                {
+                    redirect:window.location.replace('customer/index.html')
+                }
+            }else
+            {
+                document.getElementById("alert-box").innerHTML = "Invalid login details";
+            }
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+
+    } 
+}
+
+function getUserOrders() {
+    return fetch('https://tims-fast-food.herokuapp.com/api/v1/users/orders', {
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        }
+    }).then(json)
     .then(function (data) {
         console.log('Request succeeded with JSON response', data);
-        if (data['ok']== true)
-        {
-            // redirect:window.location.replace('../login.html')
-            alert('Login successful')
-        }else
-        {
-            document.getElementById("alert-box").innerHTML = "Invalid login details";
-        }
+        var orders = data['myorders'].length;
+        alert("data is "+ data['myorders'][0]['item']);
     })
     .catch(function (error) {
         console.log('Request failed', error);
     });
-
-} 
 }
