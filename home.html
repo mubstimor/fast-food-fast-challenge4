@@ -27,38 +27,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function redirect_user(){
-
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
-        var user_type = document.getElementsByName('user_type');
-
-        if(email == "" || password == ""){
-            document.getElementById("alert-box").innerHTML = "Please fill the entire form";
-        }
-        else{
-            // proceed with checking which type of user they are
-
-            for (var i = 0, length = user_type.length; i < length; i++)
-            {
-                if (user_type[i].checked)
-                {
-                    if(user_type[i].value == 'customer'){
-                        window.location.href = "customer/index.html";
-                    }
-                    else if(user_type[i].value == 'admin'){
-                        window.location.href = "admin/index.html";
-                    }
-                    break;
-                }
-            }
-
-        }
-
-    }
-
-</script>
 <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -61,20 +61,3 @@ function user_login(){
 
     } 
 }
-
-function getUserOrders() {
-    return fetch('https://tims-fast-food.herokuapp.com/api/v1/users/orders', {
-        headers: {
-            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
-            'Content-Type': 'application/json'
-        }
-    }).then(json)
-    .then(function (data) {
-        console.log('Request succeeded with JSON response', data);
-        var orders = data['myorders'].length;
-        alert("data is "+ data['myorders'][0]['item']);
-    })
-    .catch(function (error) {
-        console.log('Request failed', error);
-    });
-}
