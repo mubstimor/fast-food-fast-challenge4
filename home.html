@@ -14,12 +14,10 @@
     </div>
     <div class="center login_box">
         <div class="alert alert-info" id="alert-box">Please login with your email and password.</div>
-        <form method="post" action="index.html" name="login_form">
-            <p><input type="email" class="input" id="email" name="email" value="john@example.com" placeholder="Enter Email" required></p>
-            <p><input type="password" placeholder="**********" id="password" name="password" value="12345678" required></p>
-            <p><input type="radio" name="user_type" value="customer" checked> Customer
-                <input type="radio" name="user_type" value="admin"> Admin</p>
-            <p>
+        <form method="post" action="home.html" name="login_form">
+            <p><input type="email" class="input" id="email" name="email" placeholder="Enter Email" required></p>
+            <p><input type="password" placeholder="**********" id="password" name="password" required></p>
+    
                 <input type="button" class="button button_round_corner button_blue" onclick="user_login()" value="LOGIN">
             </p>
         </form>

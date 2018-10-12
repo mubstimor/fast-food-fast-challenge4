@@ -15,7 +15,7 @@
             <ul class="nav nav-tabs nav-menu">
                 <li><a class="nav-link" href="index.html"> Home</a></li>
                 <li><a class="nav-link active" href="order_history.html">Order History</a></li>
-                <li><a class="nav-link" href="../index.html">Logout</a></li>
+                <li><a class="nav-link" href="../home.html">Logout</a></li>
             </ul>
         </div>
 
@@ -29,7 +29,7 @@
 
             <div class="alert alert-info" id="alert-box" style="visibility:hidden;">No order history available.</div>
 
-                <table>
+                <table id="history_table" style="visibility:hidden;">
                     <thead>
                         <th>Order</th>
                         <th>Quantity</th>
@@ -60,6 +60,7 @@
             var tbody = document.getElementById("order_data");
             if (count > 0){
                 document.getElementById("alert-box").style.display = 'none';
+                document.getElementById("history_table").style.visibility = 'visible';
                 for(var i=0; i < count; i++)
                 {
                     // display table rows

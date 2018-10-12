@@ -13,13 +13,23 @@
         <h3>Fast Food Fast Sign Up</h3>
     </div>
     <div class="center login_box">
-        <form method="post" action="">
+        <form method="post" action="signup.html">
+            <div class="form-controls">
+                    <div class="alert alert-info" id="alert-box" style="display:none;"></div>
+                    <div class="form-label">
+                        Name:
+                    </div>
+                    <div class="form-input">
+                        <input type="text" class="input" name="name" id="name" placeholder="John Doe">
+                    </div>
+                </div>
+
             <div class="form-controls">
                 <div class="form-label">
                     Email:
                 </div>
                 <div class="form-input">
-                    <input type="text" class="input" name="email" placeholder="Enter Email">
+                    <input type="text" class="input" name="email" id="email" placeholder="Enter Email">
                 </div>
             </div>
 
@@ -28,7 +38,7 @@
                     Password:
                 </div>
                 <div class="form-input">
-                    <input type="password" placeholder="**********">
+                    <input type="password" id="password" placeholder="**********">
                 </div>
             </div>
 
@@ -37,7 +47,7 @@
                     Confirm Password:
                 </div>
                 <div class="form-input">
-                    <input type="password" placeholder="**********">
+                    <input type="password" id="password_confirm" placeholder="**********">
                 </div>
             </div>
 
@@ -46,16 +56,21 @@
                     Gender
                 </div>
                 <div class="form-input">
-                    <input type="radio" name="gender" value="female"> Female
-                    <input type="radio" name="gender" value="male"> Male
-                </div>
+                    <select name="gender" id="gender" style="width:80%; font-size: large;">
+                        <option value="select">Select</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+            </div>
             </div>
 
-            <p><input type="submit" class="button button_round_corner button_blue" value="SUBMIT"></p>
+            <p><input type="button" class="button button_round_corner button_blue" onclick="user_signup()" value="SUBMIT"></p>
+
         </form>
-        <p>Have an account? <a href="index.html">Login</a></p>
+        <p>Have an account? <a href="home.html">Login</a></p>
     </div>
 </div>
 
+<script src="js/scripts.js"></script>
 </body>
 </html>

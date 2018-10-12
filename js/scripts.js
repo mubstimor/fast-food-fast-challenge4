@@ -61,3 +61,69 @@ function user_login(){
 
     } 
 }
+
+function user_signup(){
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var confirm_password = document.getElementById("password_confirm").value;
+    var gender =  document.getElementById('gender');
+    var selectedGender = gender.options[gender.selectedIndex].value;
+    var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
+    
+    document.getElementById("alert-box").style.display = "block";
+
+    if (exp.test(email) == false){
+        document.getElementById("alert-box").innerHTML = "Enter a valid email address";
+        return
+    }
+
+    if (selectedGender == 'select'){
+        document.getElementById("alert-box").innerHTML = "Please select your gender";
+        return
+    }
+
+    if (password != confirm_password){
+        document.getElementById("alert-box").innerHTML = "Passwords do not match";
+        return
+    }
+
+    if(email == "" || password == "" || name == "")
+    {
+        document.getElementById("alert-box").innerHTML = "Please fill the entire form";
+    }
+
+    var userInfo = {
+        name: name,
+        email: email,
+        password: password,
+        gender: selectedGender,
+        user_type: 'Customer'
+        };
+        
+    fetch('https://tims-fast-food.herokuapp.com/api/v1/auth/signup', {
+    method: 'post',
+    headers:{
+        "Content-Type": "application/json"
+    },
+    mode: 'cors',
+    body: JSON.stringify(userInfo)
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+            document.getElementById("alert-box").innerHTML += " Click <a href='home.html'> here </a> to login";
+        }else
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+
+    
+}
