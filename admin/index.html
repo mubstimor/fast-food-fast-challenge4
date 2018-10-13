@@ -57,13 +57,18 @@
     function getAllOrders() {
         
         var token = window.sessionStorage.getItem('token');
-        var bearer_token = "\Bearer " + token;
+        var bearer_token = "Bearer " + token;
         console.log('TOKEN', bearer_token);
-        return fetch('https://tims-fast-food.herokuapp.com/api/v1/orders', {
+        return fetch('http://tims-fast-food.herokuapp.com/api/v1/orders', {
+            crossDomain:true,
+            method: 'GET',
             headers: {
                 'Authorization': bearer_token,
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json; charset=utf-8',
+                'Origin': '102.80.29.163'
+            },
+            mode: "cors",
+            cache: "no-cache"
         }).then(response => response.json())
         .then(response => {
             console.log('Request succeeded with JSON response', response);
