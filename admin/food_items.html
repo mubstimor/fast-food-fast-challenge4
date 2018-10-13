@@ -6,7 +6,8 @@
     <title>Food Items | Fast Food Fast!</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css" />
 </head>
-<body>
+
+<body onload="getMenuItems()">
 
 <div id="main_wrapper">
 
@@ -30,30 +31,17 @@
         </div>
         <div class="form_content">
 
-            <table id="food_table">
+                <div class="alert alert-info" id="alert-box" style="visibility:hidden;">No orders history available.</div>
+
+            <table id="food_table" style="visibility:hidden;">
                 <thead>
                 <th>Item</th>
                 <th>Price</th>
+                <th>Category</th>
                 <th>Actions</th>
                 </thead>
-                <tbody>
-                <tr class="odd" id="row1">
-                    <td>Chips</td>
-                    <td>7000Ush</td>
-                    <td>
-                        <a href="edit_food_item.html"><button type="button" class="button button_round_corner button_blue"> Edit </button></a> &nbsp;
-                        <a href="#"> <button type="button" class="button button_round_corner button_red" onclick="deleteRow('row1')"> Delete</button></a>
-                        </td>
-                </tr>
-                <tr class="even" id="row2">
-                    <td>Liver</td>
-                    <td>5000Ush</td>
-                    <td>
-                        <a href="edit_food_item.html"><button type="button" class="button button_round_corner button_blue"> Edit </button></a> &nbsp;
-                        <a href="#"> <button type="button" class="button button_round_corner button_red" onclick="deleteRow('row2')"> Delete</button></a>
-                    </td>
-                </tr>
-
+                <tbody id="food_items">
+                    <!-- populate list dynamically -->
                 </tbody>
             </table>
 
@@ -67,6 +55,41 @@
 
     function deleteRow(r) {
         document.getElementById(r).style.visibility = 'hidden';
+    }
+
+    function getMenuItems() {
+        return fetch('https://tims-fast-food.herokuapp.com/api/v1/menu', {
+        }).then(response => response.json())
+        .then(response => {
+            console.log('Request succeeded with JSON response', response);
+            var count = Object.keys(response['menu']).length;
+            var tbody = document.getElementById("food_items");
+            document.getElementById("food_table").style.visibility = 'visible';
+            if (count > 0){
+                
+                for(var i=0; i < count; i++)
+                {
+                    var row = '<tr class="odd" id="'+response['menu'][i]['id']+ '">';
+                    row += '<td>' + response['menu'][i]['name'] + '</td>';
+                    row += '<td>' + response['menu'][i]['price'] + 'Ush</td>';
+                    row += '<td>' + response['menu'][i]['category'] + '</td>';
+                    row += '<td>';
+                    row += '<a href="edit_food_item.html?id='+ response['menu'][i]['id'] +'"><button type="button" class="button button_round_corner button_blue"> Edit </button></a>';
+                    row += '<a href="#"> <button type="button" class="button button_round_corner button_red" onclick="deleteRow(\''+ response['menu'][i]['id'] +'\')"> Delete</button></a>';
+                    row += '</td>';
+                    row += '</tr>';
+                   
+                    tbody.innerHTML += row;
+                }
+            }
+            else{
+                document.getElementById("alert-box").innerHTML = 'No menu items available';
+            }
+                    
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
     }
 
 
