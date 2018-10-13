@@ -6,7 +6,8 @@
     <title>Home | Fast Food Fast!</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css" />
 </head>
-<body>
+
+<body onload="getAllOrders()">
 
 <div id="main_wrapper">
 
@@ -15,41 +16,43 @@
             <ul class="nav nav-tabs nav-menu">
                 <li><a class="nav-link active" href="index.html"> Home</a></li>
                 <li><a class="nav-link" href="food_items.html">Food Items</a></li>
-                <li><a class="nav-link" href="../index.html">Logout</a></li>
+                <li><a class="nav-link" href="../home.html">Logout</a></li>
             </ul>
         </div>
 
     </div>
 
-    <div class="left_box">
+    <div class="left_box" style="width:100%;">
         <div class="box-header well">
             <h2>Food Orders</h2>
         </div>
         <div class="form_content">
 
-            <table>
+                <div class="alert alert-info" id="alert-box" style="visibility:hidden;">No orders history available.</div>
+
+            <table id="orders_table" style="visibility:hidden;">
                 <thead>
-                <th>Order Period</th>
-                <th>Date Ordered</th>
+                <th>Order</th>
+                <th>Quantity</th>
+                <th>Customer</th>
                 <th>Status</th>
                 <th>Actions</th>
                 </thead>
+
+                <tbody id="order_data">
+                        <!-- populate table dynamically  -->
+                </tbody>
+
                 <tbody>
                 <tr class="odd">
                     <td>Breakfast</td>
                     <td>Today @ 8:55am</td>
+                    <td>Tim Mubs</td>
                     <td>Pending</td>
                     <td><a href="order_details.html">
                         <button type="button" class="button button_round_corner button_green">View</button></a></td>
                 </tr>
-                <tr class="even">
-                    <td>Lunch</td>
-                    <td>06/09/2018 @ 17:00</td>
-                    <td>Completed</td>
-                    <td><a href="order_details.html">
-                        <button type="button" class="button button_round_corner button_green">View</button></a>
-                    </td>
-                </tr>
+                
                 </tbody>
             </table>
 
@@ -59,5 +62,48 @@
 
 </div>
 
+
+<script>
+        function getAllOrders() {
+            return fetch('https://tims-fast-food.herokuapp.com/api/v1/orders', {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+                },
+                mode: 'cors'
+            }).then(response => response.json())
+            .then(response => {
+                console.log('Request succeeded with JSON response', response);
+                var count = Object.keys(response['orders']).length;
+                var tbody = document.getElementById("order_data");
+                if (count > 0){
+                    document.getElementById("alert-box").style.display = 'none';
+                    document.getElementById("orders_table").style.visibility = 'visible';
+                    for(var i=0; i < count; i++)
+                    {
+                        // display table rows
+                        var row = '<tr class="odd"><td>'+ response['myorders'][i]['item']+'</td>';
+                        row += '<td>'+ response['myorders'][i]['quantity'] +'</td>';
+                        row += '<td>'+ response['myorders'][i]['status'] + '</td>';
+                        row += '<td><a href="order_details.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
+                        if (response['myorders'][i]['status'] == 'new'){
+                            row += '<a href="edit_order.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
+                            row += '<a href="order_details.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
+                        }
+                        row += '</td></tr>';
+                        tbody.innerHTML += row;
+                    }
+                }
+                else{
+                    document.getElementById("alert-box").style.visibility = 'visible';
+                }
+                        
+            })
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
+        }
+    </script>
 </body>
 </html>
