@@ -51,8 +51,10 @@
         return fetch('https://tims-fast-food.herokuapp.com/api/v1/users/orders', {
             headers: {
                 'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'https://tims-fast-food-fast-challenge4.herokuapp.com/'
+            },
+            mode: 'cors'
         }).then(response => response.json())
         .then(response => {
             console.log('Request succeeded with JSON response', response);

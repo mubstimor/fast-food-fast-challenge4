@@ -55,9 +55,13 @@
 
 <script>
     function getAllOrders() {
+        
+        var token = window.sessionStorage.getItem('token');
+        var bearer_token = "\Bearer " + token;
+        console.log('TOKEN', bearer_token);
         return fetch('https://tims-fast-food.herokuapp.com/api/v1/orders', {
             headers: {
-                'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+                'Authorization': bearer_token,
                 'Content-Type': 'application/json'
             }
         }).then(response => response.json())
