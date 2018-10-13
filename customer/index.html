@@ -57,17 +57,19 @@
            
          <h2>Your Order</h2>
 
+         <form method="post" action="index.html" name="order_form">
          <div class="order_item" id="added_item">
             <div id="default_label">Nothing ordered yet</div>
             </div>
-
+        
             <div class="spacer"></div>
 
             <div class="form-btn center">
                     <div class="btn-submit">
-                        <input type="button" class="center button button_round_corner button_green" value="Submit Order">
+                        <input type="button" class="center button button_round_corner button_green" onclick="submitClientOrder()" value="Submit Order">
                     </div>
                 </div>
+            </form>
                 
     </div>
 
@@ -96,11 +98,11 @@
                     + '<span> '+food+' </span>'
                     +'</div>'
                     +'<div class="quantity-field">'
-                    +'Qty: <input type="number" size="10" id="'+food+'input" name="mynumber" min="1" value="1" />'
+                    +'Qty: <input type="number" size="10" id="mynumber" name="mynumber" min="1" value="1" />'
                     +'</div>'
                     +'<div class="new_total">'
                     +'<span>' +price +'</span>'
-                    +'<input type="number" size="10" id="'+food+'input" name="food_id" min="1" value="'+id+'" hidden />'
+                    +'<input type="number" size="10" id="food_id" name="food_id" min="1" value="'+id+'" hidden />'
                     +'</div>'
                     +'<div class="spacer"></div>';
                 
@@ -154,6 +156,6 @@
 <script>
     
 </script>
-<script src="js/scripts.js"></script>
+<script src="../js/scripts.js"></script>
 </body>
 </html>
