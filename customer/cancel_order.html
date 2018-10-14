@@ -40,6 +40,8 @@
 
             <div class="menu_item" id="menu_item">
                 <!-- populate dynamically -->
+                <input type="number" id="quantity" hidden />
+                <input type="number" id="item" hidden />
             </div>
 
         </div>
@@ -48,8 +50,8 @@
 
 <script>
     function delete_clicked(){
-        document.getElementById("alert-box").innerHTML = 'Oh, they really want you GONE.!!!';
-        // updateOrderStatus(orderId, 'cancelled');
+        // document.getElementById("alert-box").innerHTML = 'Oh, they really want you GONE.!!!';
+        cancelUserOrder(orderId);
     }
 
     function getOrderDetails(orderId) {
@@ -110,6 +112,6 @@
     }
 
 </script>
-
+<script src="../js/scripts.js"></script>
 </body>
 </html>
