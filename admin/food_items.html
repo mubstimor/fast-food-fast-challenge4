@@ -31,7 +31,7 @@
         </div>
         <div class="form_content">
 
-                <div class="alert alert-info" id="alert-box" style="visibility:hidden;">No orders history available.</div>
+                <div class="alert alert-info" id="alert-box">Loading food items.</div>
 
             <table id="food_table" style="visibility:hidden;">
                 <thead>
@@ -66,7 +66,7 @@
             var tbody = document.getElementById("food_items");
             document.getElementById("food_table").style.visibility = 'visible';
             if (count > 0){
-                
+                document.getElementById("alert-box").style.display = 'none';
                 for(var i=0; i < count; i++)
                 {
                     var row = '<tr class="odd" id="'+response['menu'][i]['id']+ '">';
@@ -75,7 +75,7 @@
                     row += '<td>' + response['menu'][i]['category'] + '</td>';
                     row += '<td>';
                     row += '<a href="edit_food_item.html?id='+ response['menu'][i]['id'] +'"><button type="button" class="button button_round_corner button_blue"> Edit </button></a>';
-                    row += '<a href="#"> <button type="button" class="button button_round_corner button_red" onclick="deleteRow(\''+ response['menu'][i]['id'] +'\')"> Delete</button></a>';
+                    row += '<a href="delete_food_item.html?id='+ response['menu'][i]['id'] +'"><button type="button" class="button button_round_corner button_red"> Delete</button></a>';
                     row += '</td>';
                     row += '</tr>';
                    

@@ -32,7 +32,7 @@
 
         <div class="center">
             <div class="alert alert-info" id="alert-box" style="display:none;">
-                Would you like to accept this order? &nbsp; <button type="button" class="button button_round_corner button_green" id="accept_btn" onclick="accept_clicked()">Accept</button> &nbsp; or &nbsp;  <button type="button" class="button button_round_corner button_red" id="reject_btn" onclick="reject_clicked()">Reject</button>
+                <!-- populate dynamically -->
             </div>
         </div>
 
@@ -71,7 +71,8 @@
     }
 
     function getOrderDetails(orderId) {
-        
+        document.getElementById("alert-box").style.display = 'block';
+        document.getElementById("alert-box").innerHTML = 'Loading order details ...';
         var token = window.sessionStorage.getItem('token');
         var bearer_token = "Bearer " + token;
         var url = 'http://tims-fast-food.herokuapp.com/api/v1/orders/'+orderId;
@@ -92,17 +93,21 @@
             var count = Object.keys(response['order']).length;
             var tbody = document.getElementById("menu_item");
             if (count > 0){
+                var buttons = 'Would you like to accept this order? &nbsp; <button type="button" class="button button_round_corner button_green" id="accept_btn" onclick="accept_clicked()">Accept</button> &nbsp; or &nbsp;  <button type="button" class="button button_round_corner button_red" id="reject_btn" onclick="reject_clicked()">Reject</button>';
                 document.getElementById("menu_item").style.visibility = 'visible';
 
                 if (response['order']['status'] == 'new'){
                     document.getElementById("alert-box").style.display = 'block';
+                    document.getElementById("alert-box").innerHTML = buttons;
                 }
 
                 if (response['order']['status'] == 'processing'){
+                    document.getElementById("alert-box").style.display = 'none';
                     document.getElementById('complete_btn').style.visibility = 'visible';
                 }
 
                 if (response['order']['status'] == 'complete'){
+                    document.getElementById("alert-box").style.display = 'none';
                     document.getElementById('complete_btn').style.visibility = 'hidden';
                 }
                 
@@ -124,7 +129,8 @@
                
             }
             else{
-                document.getElementById("alert-box").style.visibility = 'visible';
+                document.getElementById("alert-box").style.display = 'block';
+                document.getElementById("alert-box").innerHTML = 'Order details unavailable';
             }
                     
         })
