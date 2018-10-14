@@ -2,6 +2,17 @@
  * Created by timothymubiru on 31/08/2018.
  * Updated on 12/10/2018.
  */
+function GetSortOrder(prop) {  
+    return function(a, b) {  
+        if (a[prop] < b[prop]) {  
+            return 1;  
+        } else if (a[prop] > b[prop]) {  
+            return -1;  
+        }  
+        return 0;  
+    }  
+}  
+
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
       return Promise.resolve(response)

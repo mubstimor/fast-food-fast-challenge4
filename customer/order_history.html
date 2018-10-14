@@ -60,6 +60,7 @@
             console.log('Request succeeded with JSON response', response);
             var count = Object.keys(response['myorders']).length;
             var tbody = document.getElementById("order_data");
+            response['myorders'].sort(GetSortOrder("status"));
             if (count > 0){
                 document.getElementById("alert-box").style.display = 'none';
                 document.getElementById("history_table").style.visibility = 'visible';
@@ -88,5 +89,6 @@
         });
     }
 </script>
+<script src="../js/scripts.js"></script>
 </body>
 </html>
