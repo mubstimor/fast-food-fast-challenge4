@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>Home | Fast Food Fast!</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+    <script src="../js/scripts.js"></script>
 </head>
 
 <body onload="getMenuItems()">
@@ -111,55 +112,8 @@
         
     }
 
-    function getMenuItems() {
-        document.getElementById("alert-box").style.display = 'block';
-        document.getElementById("alert-box").innerHTML = 'Loading menu ...';
-        return fetch('https://tims-fast-food.herokuapp.com/api/v1/menu', {
-        }).then(response => response.json())
-        .then(response => {
-            console.log('Request succeeded with JSON response', response);
-            var count = Object.keys(response['menu']).length;
-            var items_div = document.getElementById("fooditems");
-            document.getElementById("alert-box").style.display = 'block';
-            var new_info = 'Click on the <div class="circle plus"></div> icon to add an item to your order';
-            document.getElementById("alert-box").innerHTML = new_info;
-            if (count > 0){
-                document.getElementById("menu_div").style.visibility = 'visible';
-                for(var i=0; i < count; i++)
-                {
-                    var row = '<div class="food_item">';
-                    row += '<div class="food_image">';
-                    var img_name = (response['menu'][i]['name']).toLowerCase();
-                    img_name = img_name.replace(" + ", "_");
-                    row += '<img src="../img/'+img_name+'.jpg" alt="'+img_name+'" />';
-                    row += '</div>';
-                    row += '<div class="food_item_label">';
-                    row += '<h3><span>' + response['menu'][i]['name'] + '</span></h3>';
-                    row += '</div>';
-                    row += '<div class="price-right">';
-                    row += '<span><a href="#" onclick="item_clicked(\''+ response['menu'][i]['name'] +'\', '+ response['menu'][i]['price'] +','+response['menu'][i]['id']+')">'+ response['menu'][i]['price'] +'Ush';
-                    row += '<div class="circle plus"></div>';
-                    row += '</a></span>';
-                    row += '</div>';
-                    row += '</div>';
-                   
-                    items_div.innerHTML += row;
-                }
-            }
-            else{
-                document.getElementById("alert-box").innerHTML = 'No items available to order';
-            }
-                    
-        })
-        .catch(function (error) {
-            console.log('Request failed', error);
-        });
-    }
 </script>
 
-<script>
-    
-</script>
-<script src="../js/scripts.js"></script>
+
 </body>
 </html>

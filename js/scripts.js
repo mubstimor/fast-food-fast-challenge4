@@ -139,7 +139,6 @@ function user_signup(){
     });
 }
 
-
 function submitClientOrder(){
     var item = document.getElementById("food_id").value;
     var quantity = document.getElementById("mynumber").value;
@@ -159,6 +158,49 @@ function submitClientOrder(){
         
     fetch('https://tims-fast-food.herokuapp.com/api/v1/users/orders', {
     method: 'post',
+    headers: {
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify(orderInfo)
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }else
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+}
+
+function updateClientOrder(orderId){
+    var item = document.getElementById("food_id").value;
+    var quantity = document.getElementById("mynumber").value;
+    
+    document.getElementById("alert-box").style.display = "block";
+    document.getElementById("alert-box").innerHTML = "Updating Order"
+
+    if(item == "" || quantity == "")
+    {
+        document.getElementById("alert-box").innerHTML = "Please select an item to order";
+    }
+
+    var orderInfo = {
+        item: item,
+        quantity: quantity,
+        status: 'new'
+        };
+    var url = 'https://tims-fast-food.herokuapp.com/api/v1/users/orders/' + orderId
+    fetch(url, {
+    method: 'put',
     headers: {
         'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
         'Content-Type': 'application/json'
@@ -306,6 +348,51 @@ function updateOrderStatus(orderId, status){
         {
             document.getElementById("alert-box").innerHTML = data['message'];
         }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+}
+
+function getMenuItems() {
+    document.getElementById("alert-box").style.display = 'block';
+    document.getElementById("alert-box").innerHTML = 'Loading menu ...';
+    return fetch('https://tims-fast-food.herokuapp.com/api/v1/menu', {
+    }).then(response => response.json())
+    .then(response => {
+        console.log('Request succeeded with JSON response', response);
+        var count = Object.keys(response['menu']).length;
+        var items_div = document.getElementById("fooditems");
+        document.getElementById("alert-box").style.display = 'block';
+        var new_info = 'Click on the <div class="circle plus"></div> icon to add an item to your order';
+        document.getElementById("alert-box").innerHTML = new_info;
+        if (count > 0){
+            document.getElementById("menu_div").style.visibility = 'visible';
+            for(var i=0; i < count; i++)
+            {
+                var row = '<div class="food_item">';
+                row += '<div class="food_image">';
+                var img_name = (response['menu'][i]['name']).toLowerCase();
+                img_name = img_name.replace(" + ", "_");
+                row += '<img src="../img/'+img_name+'.jpg" alt="'+img_name+'" />';
+                row += '</div>';
+                row += '<div class="food_item_label">';
+                row += '<h3><span>' + response['menu'][i]['name'] + '</span></h3>';
+                row += '</div>';
+                row += '<div class="price-right">';
+                row += '<span><a href="#" onclick="item_clicked(\''+ response['menu'][i]['name'] +'\', '+ response['menu'][i]['price'] +','+response['menu'][i]['id']+')">'+ response['menu'][i]['price'] +'Ush';
+                row += '<div class="circle plus"></div>';
+                row += '</a></span>';
+                row += '</div>';
+                row += '</div>';
+               
+                items_div.innerHTML += row;
+            }
+        }
+        else{
+            document.getElementById("alert-box").innerHTML = 'No items available to order';
+        }
+                
     })
     .catch(function (error) {
         console.log('Request failed', error);
