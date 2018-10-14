@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>Edit Food Item | Fast Food Fast!</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+    <script>
+            var itemId = location.search.split('id=')[1];
+        </script>
 </head>
-<body>
+<body onload="getMenuItemDetails(itemId)">
 
 <div id="main_wrapper">
 
@@ -26,14 +29,19 @@
             <h2>Edit Food Item</h2>
         </div>
         <div class="form_content">
-            <form method="post" action="">
+
+                <div class="alert alert-info" id="alert-box" style="display:none;">
+                    <!-- populate dynamically -->
+                </div>
+
+            <form method="post" action="edit_food_item.html" id="edit_form" style="visibility:hidden;">
 
                 <div class="form-controls">
                     <div class="form-label">
                         Name:
                     </div>
                     <div class="form-input">
-                        <input type="text" class="input" name="food"  value="Chips" placeholder="Enter Item name">
+                        <input type="text" class="input" name="food" id="food" placeholder="Enter Item name">
                     </div>
                 </div>
 
@@ -42,13 +50,22 @@
                         Price:
                     </div>
                     <div class="form-input">
-                        <input type="number" class="input" name="price" value="7000" placeholder="Item Price">
+                        <input type="number" class="input" name="price" id="price" placeholder="Item Price">
                     </div>
                 </div>
 
+                <div class="form-controls">
+                        <div class="form-label">
+                            Category:
+                        </div>
+                        <div class="form-input">
+                                <input type="text" class="input" name="category" id="category" placeholder="Enter category">
+                        </div>
+                    </div>
+
 
                 <div class="submit-control">
-                    <p><input type="submit" class="button button_round_corner button_blue" value="Update">
+                    <p><input type="button" class="button button_round_corner button_blue" value="Update" onclick="updateMenuItem(itemId)">
                     </p>
                 </div>
             </form>
@@ -58,5 +75,38 @@
 
 </div>
 
+<script>
+function getMenuItemDetails(itemId) {
+        document.getElementById("alert-box").style.display = 'block';
+        document.getElementById("alert-box").innerHTML = 'Loading menu item details ...';
+        var url = 'https://tims-fast-food.herokuapp.com/api/v1/menu/'+itemId;
+        return fetch(url, {
+        }).then(response => response.json())
+        .then(response => {
+            console.log('Request succeeded with JSON response', response);
+            var count = Object.keys(response['fooditem']).length;
+            var tbody = document.getElementById("menu_item");
+            if (count > 0){
+                document.getElementById("alert-box").style.display = 'none';
+                document.getElementById("edit_form").style.visibility = 'visible';
+                
+                // set values
+                document.getElementById("food").value = response['fooditem']['name'];
+                document.getElementById("price").value = response['fooditem']['price'];
+                document.getElementById("category").value = response['fooditem']['category'];
+                
+            }
+            else{
+                document.getElementById("alert-box").style.display = 'block';
+                document.getElementById("alert-box").innerHTML = 'Order details unavailable';
+            }
+                    
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+    }
+</script>
+<script src="../js/scripts.js"></script>
 </body>
 </html>

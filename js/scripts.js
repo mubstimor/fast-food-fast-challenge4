@@ -232,6 +232,51 @@ function addMenuItem(){
     });
 }
 
+function updateMenuItem(itemId){
+    var item = document.getElementById("food").value;
+    var price = document.getElementById("price").value;
+    var category = document.getElementById("category").value;
+    
+    document.getElementById("alert-box").style.display = "block";
+    document.getElementById("alert-box").innerHTML = "Updating Menu Item"
+
+    if(item == "" || price == "" || category == "")
+    {
+        document.getElementById("alert-box").innerHTML = "Please fill the entire form";
+    }
+
+    var itemInfo = {
+        name: item,
+        category: category,
+        price: price
+        };
+    
+    var url = 'https://tims-fast-food.herokuapp.com/api/v1/menu/' + itemId
+    fetch(url, {
+    method: 'put',
+    headers: {
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify(itemInfo)
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }else
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+}
+
 function updateOrderStatus(orderId, status){
 
     document.getElementById("alert-box").innerHTML = "Updating Order status"
