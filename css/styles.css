@@ -190,7 +190,8 @@ form {
 /* box content css styles */
 .form_content{
     padding: 5px 15px 15px 20px;
-    min-height: 300px;
+    min-height: 500px;
+    height:auto;
 }
 
 .form_content h2 {

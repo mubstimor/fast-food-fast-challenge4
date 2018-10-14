@@ -126,8 +126,8 @@
                     var row = '<div class="food_item">';
                     row += '<div class="food_image">';
                     var img_name = (response['menu'][i]['name']).toLowerCase();
-                    img_name = img_name.replace(/ + /g, "_");
-                    row += '<img src="../img/'+img_name+'.jpg" alt="Rice + Chapatti" />';
+                    img_name = img_name.replace(" + ", "_");
+                    row += '<img src="../img/'+img_name+'.jpg" alt="'+img_name+'" />';
                     row += '</div>';
                     row += '<div class="food_item_label">';
                     row += '<h3><span>' + response['menu'][i]['name'] + '</span></h3>';
