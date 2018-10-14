@@ -85,10 +85,11 @@
                     row += '<td>'+ response['orders'][i]['quantity'] +'</td>';
                     row += '<td>'+ response['orders'][i]['customer'] + '</td>';
                     row += '<td>'+ response['orders'][i]['status'] + '</td>';
-                    row += '<td><a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
-                    if (response['orders'][i]['status'] == 'new'){
-                        row += '<a href="edit_order.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
-                        row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
+                    row += '<td>';
+                    // row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
+                    if (response['orders'][i]['status'] != 'complete'){
+                        row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
+                        // row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
                     }
                     row += '</td></tr>';
                     tbody.innerHTML += row;
