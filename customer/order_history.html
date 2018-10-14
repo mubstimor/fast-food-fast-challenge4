@@ -77,7 +77,7 @@
                     row += '<td><a href="order_details.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
                     if (response['myorders'][i]['status'] == 'new'){
                         row += '<a href="edit_order.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
-                        row += '<a href="order_details.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
+                        row += '<a href="cancel_order.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
                     }
                     row += '</td></tr>';
                     tbody.innerHTML += row;

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>Cancel Order | Fast Food Fast!</title>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+    <script>
+            var orderId = location.search.split('id=')[1];    
+        </script>
+</head>
+<body onload="getOrderDetails(orderId)">
+
+
+<div id="main_wrapper">
+
+    <div class="main-menu">
+        <div class="sidebar-nav">
+            <ul class="nav nav-tabs nav-menu">
+                <li><a class="nav-link" href="index.html"> Home</a></li>
+                <li><a class="nav-link active" href="order_history.html">Order History</a></li>
+                <li><a class="nav-link" href="../home.html">Logout</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="left_box">
+        <div class="box-header well">
+            <h2>Order Details</h2>
+        </div>
+
+        <div class="center">
+                <div class="alert alert-info" id="alert-box" style="display:none;">
+                    <!-- populate dynamically -->
+                </div>
+            </div>
+    
+        <div class="form_content">
+
+            <div class="menu_item" id="menu_item">
+                <!-- populate dynamically -->
+            </div>
+
+        </div>
+
+</div>
+
+<script>
+    function delete_clicked(){
+        document.getElementById("alert-box").innerHTML = 'Oh, they really want you GONE.!!!';
+        // updateOrderStatus(orderId, 'cancelled');
+    }
+
+    function getOrderDetails(orderId) {
+        document.getElementById("alert-box").style.display = 'block';
+        document.getElementById("alert-box").innerHTML = 'Loading order details ...';
+        var token = window.sessionStorage.getItem('token');
+        var bearer_token = "Bearer " + token;
+        var url = 'http://tims-fast-food.herokuapp.com/api/v1/users/orders/'+orderId;
+        return fetch(url, {
+            crossDomain:true,
+            method: 'GET',
+            headers: {
+                'Authorization': bearer_token,
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            credentials: 'same-origin',
+            mode: "cors",
+            cache: "no-cache"
+        }).then(response => response.json())
+        .then(response => {
+            console.log('Request succeeded with JSON response', response);
+            var count = Object.keys(response['order']).length;
+            var tbody = document.getElementById("menu_item");
+            var alert_info = 'Are you sure you want to cancel the order? <br/>';
+                alert_info += '<button type="button" class="button button_round_corner button_red" id="delete_btn" onclick="delete_clicked()">Yes</button> &nbsp; or &nbsp;';
+                alert_info +=  '<a href="order_history.html"><button type="button" class="button button_round_corner button_blue">Go Back</button></a>';
+            if (count > 0){
+                document.getElementById("alert-box").style.display = 'block';
+                document.getElementById("menu_item").style.visibility = 'visible';
+                document.getElementById("alert-box").innerHTML = alert_info;
+                
+                var div = '<div class="menu-item header">';
+                div += '<h2>'+ response['order']['id'] +':'+ response['order']['status']  +'</h2>';
+                div += '</div>';
+
+                div += '<div class="food_item">';
+                div += '<div class="food_item_label">';
+                div += '<h4><span>'+ response['order']['item'] + '</span></h4>';
+                div += '</div>'
+
+                div += '<div class="price-right">';
+                div += '#'+ response['order']['quantity'];
+                div += '</div>';
+                div += '</div>';
+      
+                tbody.innerHTML += div;
+               
+            }
+            else{
+                document.getElementById("alert-box").style.display = 'block';
+                document.getElementById("alert-box").innerHTML = 'Order details unavailable';
+            }
+                    
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+    }
+
+</script>
+
+</body>
+</html>

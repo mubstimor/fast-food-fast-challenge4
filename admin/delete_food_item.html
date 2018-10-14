@@ -88,8 +88,8 @@
                 var tbody = document.getElementById("menu_item");
                 var alert_info = 'Please be warned, deleting a food item may delete all orders associated with it. <br/>';
                 alert_info += 'Are you sure you would you like to delete this menu item? <br/>';
-                alert_info += '<button type="button" class="button button_round_corner button_red" id="reject_btn" onclick="delete_clicked()">Yes</button> &nbsp; or &nbsp;';
-                alert_info +=  '<a href="food_items.html"><button type="button" class="button button_round_corner button_blue" id="accept_btn" onclick="accept_clicked()">Cancel</button></a>';
+                alert_info += '<button type="button" class="button button_round_corner button_red" id="delete_btn" onclick="delete_clicked()">Yes</button> &nbsp; or &nbsp;';
+                alert_info +=  '<a href="food_items.html"><button type="button" class="button button_round_corner button_blue">Cancel</button></a>';
                 if (count > 0){
                     document.getElementById("alert-box").style.display = 'block';
                     document.getElementById("edit_form").style.visibility = 'visible';
