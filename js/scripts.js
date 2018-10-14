@@ -170,3 +170,53 @@ function submitClientOrder(){
         console.log('Request failed', error);
     });
 }
+
+function addMenuItem(){
+    var item = document.getElementById("food").value;
+    var price = document.getElementById("price").value;
+    var category = document.getElementById("category");
+    var selectedCategory = category.options[category.selectedIndex].value;
+    
+    document.getElementById("alert-box").style.display = "block";
+    document.getElementById("alert-box").innerHTML = "Submitting Menu Item"
+
+    if (selectedCategory == 'select'){
+        document.getElementById("alert-box").innerHTML = "Please select the item category";
+        return
+    }
+
+    if(item == "" || price == "")
+    {
+        document.getElementById("alert-box").innerHTML = "Please fill the entire form";
+    }
+
+    var itemInfo = {
+        name: item,
+        category: selectedCategory,
+        price: price
+        };
+        
+    fetch('https://tims-fast-food.herokuapp.com/api/v1/menu', {
+    method: 'post',
+    headers: {
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify(itemInfo)
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }else
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+}

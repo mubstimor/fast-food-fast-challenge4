@@ -15,7 +15,7 @@
             <ul class="nav nav-tabs nav-menu">
                 <li><a class="nav-link" href="index.html"> Home</a></li>
                 <li><a class="nav-link active" href="food_items.html">Food Items</a></li>
-                <li><a class="nav-link" href="../index.html">Logout</a></li>
+                <li><a class="nav-link" href="../home.html">Logout</a></li>
             </ul>
         </div>
 
@@ -26,14 +26,16 @@
             <h2>Add Food Item</h2>
         </div>
         <div class="form_content">
-            <form method="post" action="">
+            <form method="post" action="add_food_item.html">
+
+                    <div class="alert alert-info" id="alert-box" style="display:none;"></div>
 
                 <div class="form-controls">
                     <div class="form-label">
                         Name:
                     </div>
                     <div class="form-input">
-                        <input type="text" class="input" name="food" placeholder="Enter Item name">
+                        <input type="text" class="input" name="food" id="food" placeholder="Enter Item name">
                     </div>
                 </div>
 
@@ -42,12 +44,25 @@
                         Price:
                     </div>
                     <div class="form-input">
-                        <input type="number" class="input" name="price" placeholder="Item Price">
+                        <input type="number" class="input" name="price" id="price" placeholder="Item Price">
+                    </div>
+                </div>
+
+                <div class="form-controls">
+                    <div class="form-label">
+                        Category:
+                    </div>
+                    <div class="form-input">
+                        <select name="category" id="category" style="width:90%; font-size: large;">
+                            <option value="select">Select Category</option>
+                            <option value="foods">Foods</option>
+                            <option value="beverages">Beverages</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="submit-control">
-                <p><input type="submit" class="button button_round_corner button_blue" value="SUBMIT">
+                <p><input type="button" class="button button_round_corner button_blue" onclick="addMenuItem()" value="SUBMIT">
                 </p>
                 </div>
             </form>
@@ -56,6 +71,6 @@
     </div>
 
 </div>
-
+<script src="../js/scripts.js"></script>
 </body>
 </html>
