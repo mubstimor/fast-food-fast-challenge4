@@ -27,7 +27,9 @@
         </div>
         <div class="form_content">
 
-            <div class="alert alert-info" id="alert-box" style="visibility:hidden;">No order history available.</div>
+            <div class="alert alert-info" id="alert-box" style="display:none;">
+            <!-- populate dynamically -->
+            </div>
 
                 <table id="history_table" style="visibility:hidden;">
                     <thead>
@@ -48,6 +50,8 @@
 
 <script>
     function getUserOrders() {
+        document.getElementById("alert-box").style.display = 'block';
+        document.getElementById("alert-box").innerHTML = 'Loading order history ...';
         return fetch('https://tims-fast-food.herokuapp.com/api/v1/users/orders', {
             headers: {
                 'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
@@ -80,7 +84,8 @@
                 }
             }
             else{
-                document.getElementById("alert-box").style.visibility = 'visible';
+                document.getElementById("alert-box").style.display = 'block';
+                document.getElementById("alert-box").innerHTML = 'No order history available.';
             }
                     
         })
