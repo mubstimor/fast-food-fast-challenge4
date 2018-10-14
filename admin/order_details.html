@@ -47,7 +47,7 @@
         <div class="center">
             <p id="response_label"></p>
             <!--<a href="#"> Complete Order</a>-->
-            <button type="button" class="button button_round_corner button_blue" id="complete_btn" style="visibility: hidden">Complete Order</button>
+            <button type="button" class="button button_round_corner button_blue" id="complete_btn" onclick="complete_clicked()" style="visibility: hidden">Complete Order</button>
 
         </div>
 
@@ -57,12 +57,17 @@
 <script type="text/javascript">
 
     function accept_clicked(){
-        document.getElementById("alert-box").innerHTML = "Order was accepted";
-        document.getElementById('complete_btn').style.visibility = 'visible';
+        updateOrderStatus(orderId, 'processing');
     }
 
     function reject_clicked(){
-        document.getElementById("alert-box").innerHTML = "Order was rejected";
+        updateOrderStatus(orderId, 'cancelled');
+    }
+
+    function complete_clicked(){
+        updateOrderStatus(orderId, 'complete');
+        document.getElementById("alert-box").style.display = 'block';
+        document.getElementById("alert-box").innerHTML = 'Order marked as complete';
     }
 
     function getOrderDetails(orderId) {
@@ -92,9 +97,17 @@
                 if (response['order']['status'] == 'new'){
                     document.getElementById("alert-box").style.display = 'block';
                 }
+
+                if (response['order']['status'] == 'processing'){
+                    document.getElementById('complete_btn').style.visibility = 'visible';
+                }
+
+                if (response['order']['status'] == 'complete'){
+                    document.getElementById('complete_btn').style.visibility = 'hidden';
+                }
                 
                 var div = '<div class="menu-item header">';
-                div += '<h2>'+ response['order']['user_id']  +'</h2>';
+                div += '<h2>'+ response['order']['user_id'] +':'+ response['order']['status']  +'</h2>';
                 div += '</div>';
 
                 div += '<div class="food_item">';
@@ -121,5 +134,6 @@
     }
 
 </script>
+<script src="../js/scripts.js"></script>
 </body>
 </html>

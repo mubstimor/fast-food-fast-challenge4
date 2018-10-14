@@ -220,3 +220,38 @@ function addMenuItem(){
         console.log('Request failed', error);
     });
 }
+
+function updateOrderStatus(orderId, status){
+
+    document.getElementById("alert-box").innerHTML = "Updating Order status"
+
+    var orderInfo = {
+        status: status
+        };
+
+    var url = 'https://tims-fast-food.herokuapp.com/api/v1/orders/' + orderId
+        
+    fetch(url, {
+    method: 'put',
+    headers: {
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify(orderInfo)
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }else
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
+}
