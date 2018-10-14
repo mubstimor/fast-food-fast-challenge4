@@ -26,4 +26,4 @@ Fast Food Fast Challenge 4 provides the front-end to the fast food fast app's ap
 #### Screenshots
 
 Order History of a customer
-![Order History](https://www.dropbox.com/s/9s0ibtoc8rmx5gy/Screenshot%202018-10-14%2014.16.39.png?dl=1)
+![](https://www.dropbox.com/s/9s0ibtoc8rmx5gy/Screenshot%202018-10-14%2014.16.39.png?dl=1)
