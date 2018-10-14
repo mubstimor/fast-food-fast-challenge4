@@ -75,7 +75,7 @@
             console.log('Request succeeded with JSON response', response);
             var count = Object.keys(response['orders']).length;
             var tbody = document.getElementById("order_data");
-            response['orders'].sort(GetSortOrder("status"));
+            response['orders'].sort(GetSortOrder("order_id"));
             if (count > 0){
                 document.getElementById("alert-box").style.display = 'none';
                 document.getElementById("orders_table").style.visibility = 'visible';
