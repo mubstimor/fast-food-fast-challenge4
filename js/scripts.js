@@ -18,6 +18,8 @@ function user_login(){
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 
+    document.getElementById("alert-box").innerHTML = "Logging in";
+
     if(email == "" || password == "")
     {
         document.getElementById("alert-box").innerHTML = "Please fill the entire form";
