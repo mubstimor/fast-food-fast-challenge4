@@ -62,8 +62,9 @@
          <h2>Update Your Order</h2>
 
          <form method="post" action="index.html" name="order_form">
+                <div id="default_label">Re-Select an item and place update or cancel to ignore</div>
                 <div class="order_item" id="added_item">
-                        <div id="default_label">Re-Select an item and place update or cancel to ignore</div>
+                       <!-- populate dynamically -->
         
                     </div>
         
@@ -112,7 +113,7 @@
                     +'</div>'
                     +'<div class="spacer"></div>';
                 
-            div.innerHTML += data;
+            div.innerHTML = data;
                 
     }
 
