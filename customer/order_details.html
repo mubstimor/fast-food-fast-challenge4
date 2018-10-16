@@ -52,7 +52,7 @@
         document.getElementById("alert-box").innerHTML = 'Loading order details ...';
         var token = window.sessionStorage.getItem('token');
         var bearer_token = "Bearer " + token;
-        var url = 'http://tims-fast-food.herokuapp.com/api/v1/users/orders/'+orderId;
+        var url = 'https://tims-fast-food.herokuapp.com/api/v1/users/orders/'+orderId;
         return fetch(url, {
             crossDomain:true,
             method: 'GET',
