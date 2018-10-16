@@ -90,9 +90,9 @@
                     row += '<td>'+ response['orders'][i]['customer'] + '</td>';
                     row += '<td>'+ response['orders'][i]['status'] + '</td>';
                     row += '<td>';
-                    row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
+                    row += '<a href="order_details.html?id='+ response['orders'][i]['id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
                     if (response['orders'][i]['status'] != 'complete'){
-                        row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
+                        row += '<a href="order_details.html?id='+ response['orders'][i]['id'] +'"><button type="button" class="button button_round_corner button_blue">  Edit </button></a>';
                         // row += '<a href="order_details.html?id='+ response['orders'][i]['order_id'] +'"><button type="button" class="button button_round_corner button_red">  Cancel </button></a>';
                     }
                     row += '</td></tr>';
