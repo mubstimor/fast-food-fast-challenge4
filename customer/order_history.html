@@ -34,6 +34,7 @@
                 <table id="history_table" style="visibility:hidden;">
                     <thead>
                         <th>Order</th>
+                        <th>Placed on</th>
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -72,6 +73,7 @@
                 {
                     // display table rows
                     var row = '<tr class="odd"><td>'+ response['myorders'][i]['item']+'</td>';
+                    row += '<td>'+ response['myorders'][i]['order_date'] +'</td>';
                     row += '<td>'+ response['myorders'][i]['quantity'] +'</td>';
                     row += '<td>'+ response['myorders'][i]['status'] + '</td>';
                     row += '<td><a href="order_details.html?id='+ response['myorders'][i]['id'] +'"><button type="button" class="button button_round_corner button_green">  View </button></a>';
