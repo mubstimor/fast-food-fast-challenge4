@@ -92,25 +92,6 @@
         }
     }
 
-    function item_clicked(food, price, id){
-        var foods = []
-        document.getElementById('default_label').innerHTML='';
-        var div_selected = document.getElementById('added_item');
-
-        var data = '<div class="food_item_label">'
-                    + '<span> '+food+' </span>'
-                    +'</div>'
-                    +'<div class="quantity-field">'
-                    +'Qty: <input type="number" size="10" id="mynumber" name="mynumber" min="1" value="1" />'
-                    +'</div>'
-                    +'<div class="new_total">'
-                    +'<span>' +price +'</span>'
-                    +'<input type="number" size="10" id="food_id" name="food_id" min="1" value="'+id+'" hidden />'
-                    +'</div>'
-                    +'<div class="spacer"></div>';
-                
-        div_selected.innerHTML = data;        
-    }
 </script>
 
 

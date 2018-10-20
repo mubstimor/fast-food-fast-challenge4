@@ -489,6 +489,14 @@ th {
         margin-left: 0px;
     }
 
+    .checkout_box{
+        width:100%;
+    }
+
+    .menu_box{
+        width: 100%;
+    }
+
 }
 
 @media all and (min-width:0px) and (max-width: 320px) {
@@ -500,6 +508,24 @@ th {
     }
 
     .login_box { width:auto; }
+
+    .price-right {
+        float: right;
+        padding-top: 10px;
+    }
+
+    .checkout_box{
+        width:100%;
+    }
+
+    .menu_box{
+        width: 100%;
+    }
+
+    .food_image img{
+        float: left;
+        width: 100%;
+    }
 
     .price-right {
         float: right;
