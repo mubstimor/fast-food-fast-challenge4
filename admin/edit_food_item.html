@@ -13,16 +13,17 @@
 
 <div id="main_wrapper">
 
-    <div class="main-menu">
-        <div class="sidebar-nav">
-            <ul class="nav nav-tabs nav-menu">
-                <li><a class="nav-link" href="index.html"> Home</a></li>
-                <li><a class="nav-link active" href="food_items.html">Food Items</a></li>
-                <li><a class="nav-link" href="../index.html">Logout</a></li>
-            </ul>
-        </div>
-
-    </div>
+        <div class="collapsible-menu">
+                <input type="checkbox" id="menu">
+                <label for="menu">Menu</label>
+                <div class="menu-content">
+                    <ul class="nav nav-tabs nav-menu">
+                        <li><a class="nav-link" href="index.html"> Home</a></li>
+                        <li><a class="nav-link active" href="food_items.html">Food Items</a></li>
+                        <li><a class="nav-link" href="../home.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>    
 
     <div class="left_box">
         <div class="box-header well">
@@ -74,7 +75,10 @@
     </div>
 
 </div>
-
+<div class="footer">
+        <p>&copy; Fast Food Fast 2018</p>
+    </div>
+    
 <script>
 function getMenuItemDetails(itemId) {
         document.getElementById("alert-box").style.display = 'block';

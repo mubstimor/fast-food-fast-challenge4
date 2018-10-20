@@ -15,18 +15,19 @@
 
 <div id="main_wrapper">
 
-    <div class="main-menu">
-        <div class="sidebar-nav">
-            <ul class="nav nav-tabs nav-menu">
-                <li><a class="nav-link" href="index.html"> Home</a></li>
-                <li><a class="nav-link active" href="order_history.html">Order History</a></li>
-                <li><a class="nav-link" href="../home.html">Logout</a></li>
-            </ul>
-        </div>
+        <div class="collapsible-menu">
+                <input type="checkbox" id="menu">
+                <label for="menu">Menu</label>
+                <div class="menu-content">
+                    <ul class="nav nav-tabs nav-menu">
+                        <li><a class="nav-link" href="index.html"> Home</a></li>
+                        <li><a class="nav-link active" href="order_history.html">Order History</a></li>
+                        <li><a class="nav-link" href="../home.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>    
 
-    </div>
-
-    <div class="left_box">
+    <div class="menu_box">
         <div class="box-header well">
             <h2>Menu</h2>
         </div>
@@ -81,45 +82,9 @@
     </div>
 
 </div>
-
-<script>
-    window.onscroll = function() {myFunction()};
-
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
-
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-        } else {
-            navbar.classList.remove("sticky");
-        }
-    }
-
-    function item_clicked(food, price, id){
-        var foods = []
-        document.getElementById('default_label').innerHTML='';
-        var div = document.getElementById('added_item');
-
-        var data = '<div class="food_item_label">'
-                    + '<span> '+food+' </span>'
-                    +'</div>'
-                    +'<div class="quantity-field">'
-                    +'Qty: <input type="number" size="10" id="mynumber" name="mynumber" min="1" value="1" />'
-                    +'</div>'
-                    +'<div class="new_total">'
-                    +'<span>' +price +'</span>'
-                    +'<input type="number" size="10" id="food_id" name="food_id" min="1" value="'+id+'" hidden />'
-                    +'</div>'
-                    +'<div class="spacer"></div>';
-                
-            div.innerHTML = data;
-                
-    }
-
-
-</script>
-
+<div class="footer">
+        <p>&copy; Fast Food Fast 2018</p>
+    </div>
 
 </body>
 </html>

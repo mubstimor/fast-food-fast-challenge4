@@ -85,6 +85,7 @@ function user_signup(){
     var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
     
     document.getElementById("alert-box").style.display = "block";
+    document.getElementById("alert-box").innerHTML = "Signing up";
 
     if (exp.test(email) == false){
         document.getElementById("alert-box").innerHTML = "Enter a valid email address";
@@ -432,4 +433,25 @@ function getMenuItems() {
     .catch(function (error) {
         console.log('Request failed', error);
     });
+}
+
+function item_clicked(food, price, id){
+    var foods = []
+    document.getElementById("alert-box").innerHTML = "Item added to Your order";
+    document.getElementById('default_label').innerHTML='';
+    var div_selected = document.getElementById('added_item');
+
+    var data = '<div class="food_item_label">'
+                + '<span> '+food+' </span>'
+                +'</div>'
+                +'<div class="quantity-field">'
+                +'Qty: <input type="number" size="10" id="mynumber" name="mynumber" min="1" value="1" />'
+                +'</div>'
+                +'<div class="new_total">'
+                +'<span>' +price +'</span>'
+                +'<input type="number" size="10" id="food_id" name="food_id" min="1" value="'+id+'" hidden />'
+                +'</div>'
+                +'<div class="spacer"></div>';
+            
+    div_selected.innerHTML = data;        
 }
