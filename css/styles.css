@@ -602,7 +602,7 @@ th {
 
 .collapsible-menu label {
     font-family: 'Sedgwick Ave Display', cursive;
-    font-size: 40px;
+    font-size: 30px;
     display: block;
     cursor: pointer;
     background: url(../img/icons/menu.png) no-repeat left center;
