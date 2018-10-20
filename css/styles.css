@@ -5,7 +5,7 @@ body {
 
 #main_wrapper
 {
-    margin-left: 0px;
+    margin-left: 0px; /* Same as the width of the sidebar */
     padding: 0px 10px;
 }
 
@@ -156,7 +156,7 @@ form {
 }
 
 .left_box{
-    width:100%;
+    width:80%;
     float: left;
     margin-left: 20px;
     border: 1px solid #DEDEDE;
@@ -168,6 +168,12 @@ form {
     box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
     -webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
     -moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+}
+
+.menu_box {
+    width: 70%;
+    margin-left: 0px;
+    float: left;
 }
 
 .checkout_box{
@@ -337,6 +343,11 @@ th {
         margin-left: 0px;
     }
 
+    .menu_box {
+        width: 70%;
+        margin-left: 0px;
+    }
+
     .sidebar-nav {
         position: fixed;
         z-index: 1;
@@ -474,11 +485,6 @@ th {
     }
 
     .left_box{
-        width: 100%;
-        margin-left: 0px;
-    }
-
-    .menu_box{
         width: 100%;
         margin-left: 0px;
     }

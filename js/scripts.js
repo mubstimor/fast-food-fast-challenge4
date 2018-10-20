@@ -85,6 +85,7 @@ function user_signup(){
     var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
     
     document.getElementById("alert-box").style.display = "block";
+    document.getElementById("alert-box").innerHTML = "Signing up";
 
     if (exp.test(email) == false){
         document.getElementById("alert-box").innerHTML = "Enter a valid email address";
