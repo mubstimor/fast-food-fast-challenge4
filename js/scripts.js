@@ -55,6 +55,9 @@ function user_login(){
             if (data['ok']== true)
             {
                 window.sessionStorage.setItem('token', data['data']['token']);
+                var last_loggedIn = new Date();
+                window.sessionStorage.setItem('last_loggedIn', last_loggedIn);
+                
                 if (data['data']['role'] == 'Admin')
                 {
                     redirect:window.location.replace('admin/index.html')

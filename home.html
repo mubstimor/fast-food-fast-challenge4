@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>Login | Fast Food Fast!</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
+   
 </head>
 <body>
 
@@ -25,6 +26,17 @@
     </div>
 </div>
 
+<script>
+    var token = location.search.split('token=')[1]; 
+   
+    if (token == 'null'){
+        document.getElementById("alert-box").innerHTML = "Please login first";
+    }
+    if (token == "expired"){
+        document.getElementById("alert-box").innerHTML = "Session expired, Please login first";
+    } 
+    
+</script>
 <script src="js/scripts.js"></script>
 </body>
 </html>
