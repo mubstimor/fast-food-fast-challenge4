@@ -279,25 +279,23 @@ function addMenuItem(){
 }
 
 function updateMenuItem(itemId){
-    var item = document.getElementById("food").value;
+    var name = document.getElementById("food").value;
     var price = document.getElementById("price").value;
     var category = document.getElementById("category").value;
     
     document.getElementById("alert-box").style.display = "block";
     document.getElementById("alert-box").innerHTML = "Updating Menu Item"
 
-    if(item == "" || price == "" || category == "")
+    if(name == "" || price == "" || category == "")
     {
         document.getElementById("alert-box").innerHTML = "Please fill the entire form";
     }
 
     var itemInfo = {
-        name: item,
+        name: name,
         category: category,
-        price: price,
-        status: "Published"
+        price: price
         };
-    
     var url = 'https://tims-fast-food.herokuapp.com/api/v1/menu/' + itemId
     fetch(url, {
     method: 'put',
@@ -470,7 +468,8 @@ function deleteMenuItem(itemId){
     headers: {
         'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
         'Content-Type': 'application/json'
-    }
+    },
+    mode: 'cors'
     })
     .then(json)
     .then(function (data) {
