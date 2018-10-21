@@ -291,7 +291,8 @@ function updateMenuItem(itemId){
     var itemInfo = {
         name: item,
         category: category,
-        price: price
+        price: price,
+        status: "Published"
         };
     
     var url = 'https://tims-fast-food.herokuapp.com/api/v1/menu/' + itemId
@@ -454,4 +455,30 @@ function item_clicked(food, price, id){
                 +'<div class="spacer"></div>';
             
     div_selected.innerHTML = data;        
+}
+
+function deleteMenuItem(itemId){
+
+    document.getElementById("alert-box").innerHTML = "Deleting menu item"
+    var url = 'https://tims-fast-food.herokuapp.com/api/v1/menu/' + itemId
+        
+    fetch(url, {
+    method: 'delete',
+    headers: {
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    }
+    })
+    .then(json)
+    .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        if (data['error']== false)
+        {
+            document.getElementById("alert-box").innerHTML = data['message'];
+            redirect:window.location.replace('food_items.html')
+        }
+    })
+    .catch(function (error) {
+        console.log('Request failed', error);
+    });
 }

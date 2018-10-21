@@ -199,7 +199,7 @@ form {
 /* box content css styles */
 .form_content{
     padding: 5px 15px 15px 20px;
-    min-height: 500px;
+    min-height: 300px;
     height:auto;
 }
 
@@ -638,4 +638,5 @@ input:checked ~ .menu-content {
     background-color: #f5f5f5;
     color: #3a3a3a;
     text-align: center;
+    display: none;
 }
