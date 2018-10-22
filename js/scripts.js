@@ -156,7 +156,7 @@ function submitClientOrder(){
     }
 
     var orderInfo = {
-        item: item,
+        name: item,
         quantity: quantity
         };
         
@@ -327,7 +327,7 @@ function updateOrderStatus(orderId, status){
     document.getElementById("alert-box").innerHTML = "Updating Order status"
 
     var orderInfo = {
-        status: status
+        name: status
         };
 
     var url = 'https://tims-fast-food.herokuapp.com/api/v1/orders/' + orderId
