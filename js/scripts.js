@@ -362,7 +362,7 @@ function cancelUserOrder(orderId){
     document.getElementById("alert-box").innerHTML = "Cancelling Order"
 
     var orderInfo = {
-        status: 'cancelled'
+        name: 'cancelled'
         };
 
     var url = 'https://tims-fast-food.herokuapp.com/api/v1/users/orders/cancel/' + orderId
