@@ -2,6 +2,10 @@
  * Created by timothymubiru on 31/08/2018.
  * Updated on 12/10/2018.
  */
+function trimSpaces(x) {
+    return x.replace(/^\s+|\s+$/gm,'');
+}
+
 function GetSortOrder(prop) {  
     return function(a, b) {  
         if (a[prop] < b[prop]) {  
@@ -26,8 +30,8 @@ function json(response) {
 }
 
 function user_login(){
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var email = trimSpaces(document.getElementById("email").value);
+    var password = trimSpaces(ocument.getElementById("password").value);
 
     document.getElementById("alert-box").innerHTML = "Logging in";
 
@@ -79,10 +83,10 @@ function user_login(){
 }
 
 function user_signup(){
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var confirm_password = document.getElementById("password_confirm").value;
+    var name = trimSpaces(document.getElementById("name").value);
+    var email = trimSpaces(document.getElementById("email").value);
+    var password = trimSpaces(document.getElementById("password").value);
+    var confirm_password = trimSpaces(document.getElementById("password_confirm").value);
     var gender =  document.getElementById('gender');
     var selectedGender = gender.options[gender.selectedIndex].value;
     var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
@@ -144,8 +148,8 @@ function user_signup(){
 }
 
 function submitClientOrder(){
-    var item = document.getElementById("food_id").value;
-    var quantity = document.getElementById("mynumber").value;
+    var item = trimSpaces(document.getElementById("food_id").value);
+    var quantity = trimSpaces(document.getElementById("mynumber").value);
     
     document.getElementById("alert-box").style.display = "block";
     document.getElementById("alert-box").innerHTML = "Submitting Order"
@@ -186,8 +190,8 @@ function submitClientOrder(){
 }
 
 function updateClientOrder(orderId){
-    var item = document.getElementById("food_id").value;
-    var quantity = document.getElementById("mynumber").value;
+    var item = trimSpaces(document.getElementById("food_id").value);
+    var quantity = trimSpaces(document.getElementById("mynumber").value);
     
     document.getElementById("alert-box").style.display = "block";
     document.getElementById("alert-box").innerHTML = "Updating Order"
@@ -229,8 +233,8 @@ function updateClientOrder(orderId){
 }
 
 function addMenuItem(){
-    var item = document.getElementById("food").value;
-    var price = document.getElementById("price").value;
+    var item = trimSpaces(document.getElementById("food").value);
+    var price = trimSpaces(document.getElementById("price").value);
     var category = document.getElementById("category");
     var selectedCategory = category.options[category.selectedIndex].value;
     
@@ -279,9 +283,9 @@ function addMenuItem(){
 }
 
 function updateMenuItem(itemId){
-    var name = document.getElementById("food").value;
-    var price = document.getElementById("price").value;
-    var category = document.getElementById("category").value;
+    var name = trimSpaces(document.getElementById("food").value);
+    var price = trimSpaces(document.getElementById("price").value);
+    var category = trimSpaces(document.getElementById("category").value);
     
     document.getElementById("alert-box").style.display = "block";
     document.getElementById("alert-box").innerHTML = "Updating Menu Item"
