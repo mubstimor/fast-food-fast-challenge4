@@ -415,7 +415,7 @@ function getMenuItems() {
                 var row = '<div class="food_item">';
                 row += '<div class="food_image">';
                 var img_name = (response['menu'][i]['name']).toLowerCase();
-                img_name = img_name.replace(" + ", "_");
+                img_name = img_name.replace(" ", "_");
                 row += '<img src="../img/'+img_name+'.jpg" alt="'+img_name+'" />';
                 row += '</div>';
                 row += '<div class="food_item_label">';
