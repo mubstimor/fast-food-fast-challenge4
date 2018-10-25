@@ -31,7 +31,7 @@ function json(response) {
 
 function user_login(){
     var email = trimSpaces(document.getElementById("email").value);
-    var password = trimSpaces(ocument.getElementById("password").value);
+    var password = trimSpaces(document.getElementById("password").value);
 
     document.getElementById("alert-box").innerHTML = "Logging in";
 
